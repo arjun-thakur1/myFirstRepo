@@ -21,56 +21,50 @@ public class CompanyController {
         return companyService.getAllDetails();
     }
 
-    @GetMapping("/company/{id}")
-    public Optional<CompanyEntity> getCompaniesDetails(@RequestBody @PathVariable("id") String id) {
-        return companyService.getDetails(id);
+    @GetMapping(value="/company_by_id", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<CompanyEntity> getCompanyDetails(@RequestParam("companyId") String companyId) {
+        return companyService.getDetails(companyId);
     }
+
+    @DeleteMapping("/company/{company_id}")
+    public String deleteCompany(@PathVariable("company_id") String company_id) {
+        return companyService.deleteCompanyDetails(company_id);
+
+
+    }
+
+    @RequestMapping(value="/company/update_details",method = RequestMethod.PUT)
+     public void updateCompanyDetails(@RequestBody CompanyEntity companyEntity ) {         //@RequestParam("companyId") String companyId,@RequestParam(name="companyName", required = false)String companyName,@RequestParam(name="ceoName", required = false)String ceoName)
+                                                                                           //@Pathvariable..@RequestBody....
+
+        companyService.updateDetails(companyEntity);        //companyId, companyName, ceoName
+        return;
+    }
+
 
     @PostMapping(value = "/company", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addCompanyDetails(@RequestBody CompanyEntity companyEntity) {
         companyService.addCompany(companyEntity);
         return;
     }
-
-
-
-}
-
 /*
-    @GetMapping("/company")
-    public String get() {
-        return "hello ";
+    @GetMapping (value="company_complete_details")
+    public List<Object> getCompanyCompleteDetails(@RequestParam("companyId") String companyId){
+
+        return new Object( companyService.getCompanyCompleteDetails(companyId) );
     }
-    @PostMapping("/newCompany")
-    String newCompany(@RequestBody CompanyEntity newCompany) throws Exception{
-        try {
-            this.companyRepository.save(newCompany);
-            }catch(Exception e)
-                {
-                  System.out.println("in catch"+" "+e);
-                  return "in catch";
-                }
-        return "Successful";
-    }
+
+*/
+
 }
-    /*
-    public List<CompanyEntity> getDetails() throws Exception{
-        try  {
-            return this.companyRepository.findAll();
-              }
-        catch (Exception e)
-           {
-               List<CompanyEntity> c = new ArrayList<>();
-               System.out.println(e);
-               return c;
 
 
-           }
-    }
-*/
- /*   @PostMapping("/{pos}")
-    public List<CompanyEntity> addData(@RequestBody CompanyEntity pos)
-    {
-        return this.companyRepository.;
-    }
-*/
+
+
+
+
+
+
+
+
+

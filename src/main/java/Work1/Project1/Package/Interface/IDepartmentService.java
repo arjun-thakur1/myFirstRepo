@@ -1,4 +1,8 @@
 package Work1.Project1.Package.Interface;
 
-public class IDepartmentService {
+import Work1.Project1.Package.Services.DepartmentServices;
+
+public class IDepartmentService extends DepartmentServices {
+
+
 }

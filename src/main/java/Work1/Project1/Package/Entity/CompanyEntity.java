@@ -16,9 +16,10 @@ public class CompanyEntity {
     @Column(name="company_id")
     private String  companyId;
 
-    @OneToMany(mappedBy = "company_id")
-    private Set<DepartmentEntity> departments;
-
+   /* @OneToMany(mappedBy = "companyEntity1", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<DepartmentEntity> departmentEntitySet;
+*/
     public CompanyEntity() {
     }
 

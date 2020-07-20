@@ -1,5 +1,8 @@
 package Work1.Project1.Package.Entity;
 import lombok.Data;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
@@ -13,18 +16,19 @@ public class DepartmentEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    private DepartmentPK departmentPK;
+    public DepartmentPK departmentPK;
 
-    @ManyToOne
-    @JoinColumn(name="company_id")
-    private CompanyEntity companyEntity;
 
+   // @ManyToOne(fetch = FetchType.LAZY)
+    //private CompanyEntity companyEntity1;
+
+    @Getter @Setter
     @Column(name="department_name")
     private String departmentName;
 
+    @Getter @Setter
     @Column(name="manager_id")
     private String managerId;
-
 
 
 }
