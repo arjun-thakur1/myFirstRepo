@@ -1,4 +1,4 @@
-package Work1.Project1.Package.Entity;
+package Work1.Project1.Package.entity;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +25,6 @@ public class EmployeeEntity implements Serializable {
 
     @Getter @Setter
     @Column(name="salary")
-    private int salary;
+    private Long salary;
 
 }

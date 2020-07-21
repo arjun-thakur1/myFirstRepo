@@ -1,4 +1,4 @@
-package Work1.Project1.Package.Entity;
+package Work1.Project1.Package.entity;
 
 import lombok.*;
 
@@ -13,9 +13,9 @@ public class EmployeePK implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Getter @Setter private String employeeId;
-    @Getter @Setter private String departmentId;
-    @Getter @Setter private String companyId;
+    @Getter @Setter private Long employeeId;
+    @Getter @Setter private Long departmentId;
+    @Getter @Setter private Long companyId;
 
 
 }

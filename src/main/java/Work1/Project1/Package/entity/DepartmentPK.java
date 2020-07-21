@@ -1,4 +1,4 @@
-package Work1.Project1.Package.Entity;
+package Work1.Project1.Package.entity;
 
 import lombok.Data;
 
@@ -16,26 +16,26 @@ public class DepartmentPK implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String companyId;
-    private String departmentId;
+    private Long companyId;
+    private Long departmentId;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public String getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
-    public String getDepartmentId() {
+    public Long getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(String departmentId) {
+    public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
     }
 
@@ -43,7 +43,7 @@ public class DepartmentPK implements Serializable {
     {
 
     }
-    public DepartmentPK(String departmentId,String companyId)
+    public DepartmentPK(Long departmentId,Long companyId)
     {
         this.companyId=companyId;
         this.departmentId=departmentId;

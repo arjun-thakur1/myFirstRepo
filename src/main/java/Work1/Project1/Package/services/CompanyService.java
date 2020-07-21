@@ -1,8 +1,8 @@
-package Work1.Project1.Package.Services;
+package Work1.Project1.Package.services;
 
-import Work1.Project1.Package.Entity.CompanyEntity;
-import Work1.Project1.Package.Interface.IDepartmentService;
-import Work1.Project1.Package.Repository.CompanyRepository;
+import Work1.Project1.Package.entity.CompanyEntity;
+import Work1.Project1.Package.entity.DepartmentEntity;
+import Work1.Project1.Package.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,8 @@ public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
+    @Autowired
+    private DepartmentServices departmentServices;
 
     public List<CompanyEntity> getAllDetails() {
         return this.companyRepository.findAll();
@@ -25,11 +27,11 @@ public class CompanyService {
         this.companyRepository.save(companyEntity);
     }
 
-    public Optional<CompanyEntity> getDetails(String id) {
+    public Optional<CompanyEntity> getDetails(Long id) {
         return this.companyRepository.findById(id);
     }
 
-    public String deleteCompanyDetails(String company_id) {
+    public String deleteCompanyDetails(Long company_id) {
         try {
         this.companyRepository.deleteById(company_id);
         return "Successfully Deleted";
@@ -60,15 +62,16 @@ public class CompanyService {
         return;
     }
 
- /*   public Object getCompanyCompleteDetails(String companyId) {
+    public List<DepartmentEntity> getCompanyCompleteDetails(long companyId) {
 
       Optional<CompanyEntity> companyEntity=  companyRepository.findById(companyId);
       if(companyEntity.isPresent())
       {
-          DepartmentServices departmentServices = new DepartmentServices();
-          departmentServices.
+         // DepartmentServices departmentServices = new DepartmentServices();
+         return departmentServices.getAllDepartmentsOfCompany(companyId);
       }
+      return null;
     }
 
-  */
+
 }

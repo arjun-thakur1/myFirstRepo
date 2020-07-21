@@ -1,4 +1,4 @@
-package Work1.Project1.Package.Entity;
+package Work1.Project1.Package.entity;
 import lombok.Data;
 
 import lombok.Getter;
@@ -26,9 +26,7 @@ public class DepartmentEntity implements Serializable {
     @Column(name="department_name")
     private String departmentName;
 
-    @Getter @Setter
-    @Column(name="manager_id")
-    private String managerId;
+
 
 
 }

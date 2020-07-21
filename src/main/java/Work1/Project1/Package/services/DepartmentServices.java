@@ -1,16 +1,13 @@
-package Work1.Project1.Package.Services;
+package Work1.Project1.Package.services;
 
-import Work1.Project1.Package.Entity.CompanyEntity;
-import Work1.Project1.Package.Entity.DepartmentEntity;
-import Work1.Project1.Package.Entity.DepartmentPK;
-import Work1.Project1.Package.Entity.EmployeeEntity;
-import Work1.Project1.Package.Repository.CompanyRepository;
-import Work1.Project1.Package.Repository.DepartmentRepository;
-import Work1.Project1.Package.Repository.EmployeeRepository;
+import Work1.Project1.Package.entity.DepartmentEntity;
+import Work1.Project1.Package.entity.DepartmentPK;
+import Work1.Project1.Package.repository.CompanyRepository;
+import Work1.Project1.Package.repository.DepartmentRepository;
+import Work1.Project1.Package.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.ManyToOne;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,16 +24,16 @@ public class DepartmentServices {
 
 
     public String addDepartment(DepartmentEntity departmentEntity) {
-        String companyId= departmentEntity.getDepartmentPK().getCompanyId();
-        boolean companyPresent=companyRepository.existsById(companyId);
-        if(companyPresent) {
+        Long companyId= departmentEntity.getDepartmentPK().getCompanyId();
+   //     boolean companyPresent=companyRepository.existsById(companyId);
+       // if(companyPresent) {
             this.departmentRepository.save(departmentEntity);
             return "Successfully added";
-        }
-        return "Company Not registered";
+    //    }
+     //   return "Company Not registered";
     }
 
-    public Optional<DepartmentEntity> getDepartmentDetail(String departmentId, String companyId) {
+    public Optional<DepartmentEntity> getDepartmentDetail(Long departmentId, Long companyId) {
         DepartmentPK departmentPK = new  DepartmentPK(departmentId,companyId);
 
         return this.departmentRepository.findById(departmentPK);
@@ -60,27 +57,19 @@ public class DepartmentServices {
             {
                 updatedepartmentEntity.setDepartmentName(departmentEntity.getDepartmentName());
             }
-            if(updatedepartmentEntity.getManagerId()==null)
-            {
-                updatedepartmentEntity.setManagerId(departmentEntity.getManagerId());
-            }
+
         }
 
         departmentRepository.save(updatedepartmentEntity);
         return;
     }
-/*
-    public List<Object>  getAllDepartmentsOfCompany(String companyId)
-      {
-          List<DepartmentEntity> departmentEntityList= departmentRepository.findByDepartmentPKCompanyId(companyId);
 
-          departmentEntityList.forEach((d) -> {
-              List<EmployeeEntity> employeeEntityList= employeeRepository.findAllByEmployeePKCompanyIdAndDepartmentId(companyId,d.getDepartmentPK().getDepartmentId());
+    public List<DepartmentEntity> getAllDepartmentsOfCompany(long companyId) {
+        return departmentRepository.findAllByDepartmentPKCompanyId(companyId);
+    }
 
-          });
 
-          return ;
-      }
 
- */
+
+
 }

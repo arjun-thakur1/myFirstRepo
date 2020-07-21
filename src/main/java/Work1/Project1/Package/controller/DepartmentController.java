@@ -1,9 +1,8 @@
-package Work1.Project1.Package.Controller;
+package Work1.Project1.Package.controller;
 
-import Work1.Project1.Package.Entity.CompanyEntity;
-import Work1.Project1.Package.Entity.DepartmentEntity;
-import Work1.Project1.Package.Entity.DepartmentPK;
-import Work1.Project1.Package.Services.DepartmentServices;
+import Work1.Project1.Package.entity.DepartmentEntity;
+import Work1.Project1.Package.entity.DepartmentPK;
+import Work1.Project1.Package.services.DepartmentServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,19 +21,19 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/department_by_ids", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<DepartmentEntity> getDepartmentDetails(@RequestParam("departmentId") String departmentId,
-                                                           @RequestParam("companyId") String companyId) {
+    public Optional<DepartmentEntity> getDepartmentDetails(@RequestParam("departmentId") Long departmentId,
+                                                           @RequestParam("companyId") Long companyId) {
 
         return departmentService.getDepartmentDetail(departmentId, companyId);
     }
 
 
     @DeleteMapping("/department/")
-    public void deleteDepartment(@RequestParam("department_id") String department_id,
-                                 @RequestParam("company_id") String company_id) throws Exception {
+    public String deleteDepartment(@RequestParam("department_id") Long department_id,
+                                 @RequestParam("company_id") Long company_id) throws Exception {
         DepartmentPK departmentPK = new DepartmentPK(department_id, company_id);
         departmentService.deleteDepartmentDetails(departmentPK);
-        return;
+        return "Deleted successfully";
     }
 
     @PostMapping(value = "/department", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -45,10 +44,10 @@ public class DepartmentController {
 
 
     @RequestMapping(value = "/department/update_details", method = RequestMethod.PUT)
-    public void updateDepartmentDetails(@RequestBody DepartmentEntity departmentEntity) {
+    public String updateDepartmentDetails(@RequestBody DepartmentEntity departmentEntity) {
 
         departmentService.updateDetails(departmentEntity);
-
+       return "Updated Successfully";
     }
 
 

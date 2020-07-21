@@ -1,7 +1,6 @@
-package Work1.Project1.Package.Entity;
+package Work1.Project1.Package.entity;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table  //(name="company_table")
@@ -14,7 +13,7 @@ public class CompanyEntity {
 
     @Id
     @Column(name="company_id")
-    private String  companyId;
+    private Long  companyId;
 
    /* @OneToMany(mappedBy = "companyEntity1", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
@@ -23,7 +22,7 @@ public class CompanyEntity {
     public CompanyEntity() {
     }
 
-    public CompanyEntity(String companyName, String ceoName, String companyId) {
+    public CompanyEntity(String companyName, String ceoName, Long companyId) {
         this.companyName = companyName;
         this.ceoName = ceoName;
         this.companyId = companyId;
@@ -45,11 +44,11 @@ public class CompanyEntity {
         this.ceoName = ceoName;
     }
 
-    public String getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
