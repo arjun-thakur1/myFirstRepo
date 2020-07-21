@@ -6,12 +6,14 @@ import Work1.Project1.Package.repository.CompanyRepository;
 import Work1.Project1.Package.repository.DepartmentRepository;
 import Work1.Project1.Package.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class DepartmentServices {
 
     @Autowired

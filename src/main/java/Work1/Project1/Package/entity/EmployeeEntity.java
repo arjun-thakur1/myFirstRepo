@@ -2,6 +2,7 @@ package Work1.Project1.Package.entity;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -5,6 +5,10 @@ import Work1.Project1.Package.entity.EmployeeEntity;
 import Work1.Project1.Package.entity.EmployeePK;
 import Work1.Project1.Package.services.EmployeeServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +26,20 @@ public class EmployeeController {
         return employeeService.getAllDetails();
     }
 
+    //..............
+    @GetMapping("/employee_details")
+    public List<EmployeeEntity> getEmployeesDetail(@RequestBody EmployeePK employeePK) {
+
+        return employeeService.getEmployeeDetails(employeePK);
+    }
+
     @PostMapping(value = "/add_employee", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addEmployeeDetails(@RequestBody EmployeeEntity employeeEntity) {
 
         employeeService.addEmployee(employeeEntity);
     }
 
+    //...........
     @DeleteMapping("/delete_employee")
     public void deleteEmployee(@RequestParam("employeeId") Long employeeId,
                                  @RequestParam("departmentId") Long departmentId,
@@ -37,6 +49,7 @@ public class EmployeeController {
         return;
     }
 
+     //.....................
     @RequestMapping(value = "/employee/update_details", method = RequestMethod.PUT)
     public void updateDepartmentDetails(@RequestBody EmployeeEntity employeeEntity) {
 

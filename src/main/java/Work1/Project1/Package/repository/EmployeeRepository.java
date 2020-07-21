@@ -3,10 +3,12 @@ package Work1.Project1.Package.repository;
 import Work1.Project1.Package.entity.EmployeeEntity;
 import Work1.Project1.Package.entity.EmployeePK;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.redis.core.RedisHash;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
+@RedisHash
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, EmployeePK>{
 
 

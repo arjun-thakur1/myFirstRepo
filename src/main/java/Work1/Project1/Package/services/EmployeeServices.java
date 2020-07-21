@@ -4,12 +4,19 @@ import Work1.Project1.Package.entity.EmployeeEntity;
 import Work1.Project1.Package.entity.EmployeePK;
 import Work1.Project1.Package.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@CacheConfig(cacheNames={"employee_cache"})
+@Component
 public class EmployeeServices {
 
     @Autowired
@@ -19,11 +26,16 @@ public class EmployeeServices {
         return this.employeeRepository.findAll();
     }
 
+    @Cacheable(value="employee_cache")
+    public List<EmployeeEntity> getEmployeeDetails(EmployeePK employeePK) {
+        return this.employeeRepository.findByEmployeePK(employeePK);
+    }
     public void addEmployee(EmployeeEntity employeeEntity) {
 
         this.employeeRepository.save(employeeEntity);
     }
 
+    @CacheEvict(value = "employee_cache", allEntries=true)
     public void deleteEmployeeDetails(EmployeePK employeePK) throws Exception{
         try {
             this.employeeRepository.deleteById(employeePK);
@@ -33,7 +45,8 @@ public class EmployeeServices {
         }
     }
 
-    public void updateDetails(EmployeeEntity updateemployeeEntity) {
+    @CachePut(value = "employee_cache")
+    public void  updateDetails(EmployeeEntity updateemployeeEntity) {
         Optional<EmployeeEntity> fetchedemployeeEntity=employeeRepository.findById(updateemployeeEntity.getEmployeePK());
         if(fetchedemployeeEntity.isPresent())
         {
@@ -144,4 +157,6 @@ public class EmployeeServices {
             updateDetails(l);
         });
     }
+
+
 }
